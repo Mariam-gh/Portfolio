@@ -1,0 +1,384 @@
+ //Happle Technology Store Program
+#include<vector>
+#include<iostream>
+#include <string>
+#include<map >
+
+class Order
+{
+	public:
+	 Order()
+	 {
+	 	
+	 }
+	 
+	virtual void display()=0;
+	
+};
+
+class Device: public Order
+{
+	protected:
+		std::string brand;
+		std::string model;
+		double price;
+	public:
+      Device(std::string b, std::string m, double p)
+      :brand(b),model(m),price(p){}
+     //getters
+	 std::string getbrand(){return brand;} 
+	 std::string getmodel(){return model;}
+	 double getprice(){return price;}
+	 
+	//displayfunction
+	 virtual void display()=0;
+	
+};//end of Device class
+
+class Phone:public Device
+{
+public:	
+Phone(std::string brand,std::string model,double price)
+:Device(brand,model,price){}
+
+void display()
+{
+	std::cout<<"Brand: "<<brand<<" Model: "<<model<<" Price: $"<<price;
+}
+		
+};
+
+//enc of Phone class---------------
+class Tablet:public Device{public:
+	Tablet(std::string brand,std::string model,double price)
+	:Device(brand,model,price){}
+	
+void display()
+{
+	std::cout<<"Brand: "<<brand<<" Model: "<<model<<" Price: $"<<price;
+}
+};//end of tablet class----------------
+
+
+class Watch:public Device{public:
+	Watch(std::string brand,std::string model,double price)
+	:Device(brand,model,price){}
+	
+void display()
+{
+	std::cout<<"Brand: "<<brand<<" Model: "<<model<<" Price: $"<<price;
+}
+};//end of Watch class-------------------
+
+class Computer:public Device{public:
+	Computer(std::string brand,std::string model,double price)
+	:Device(brand,model,price){}
+	
+void display()
+{
+	std::cout<<"Brand: "<<brand<<" Model: "<<model<<" Price: $"<<price;
+}
+};//end of Computer class-------------------
+
+
+class SmartTV:public Device{public:
+	SmartTV(std::string brand,std::string model,double price)
+	:Device(brand,model,price){}
+	
+	void display()
+{
+	std::cout<<"Brand: "<<brand<<" Model: "<<model<<" Price: $"<<price;
+}
+};//end of SmartTV class-------------------
+
+
+
+class Subscription : public Order
+{
+
+	protected:
+		std::string planName;
+		double planPrice;
+			
+	public:
+		
+	Subscription(std::string pn, double price):planName(pn),planPrice(price)
+	{  }	
+	   
+	//getters.........
+	std::string getplanName() {return planName;}
+	double getplanPrice()  {return planPrice;}
+	
+	
+     virtual void display()=0;
+	 //{std::cout << "Plan: " <<planName << ", Price: $" << planPrice;}
+	   
+};
+///end of Subscription class------------
+
+
+class PhoneSubscription : public Subscription{
+	private:
+		std::string planinfo;
+	public:
+    PhoneSubscription(std::string planName, double planPrice,std::string pf)
+	:Subscription(planName,planPrice)
+	 {
+	 	planinfo = pf;
+	 }	
+	 
+	 
+	void display()
+	{ 
+std::cout <<planName<<planPrice<<planinfo<<std::endl;
+	}
+};
+//end of phone subscription class---------
+
+
+class TabletSubscription : public Subscription{
+	private:
+		std::string planinfo;
+		
+		
+	public:
+    TabletSubscription(std::string planName, double planPrice,std::string pf)
+	:Subscription(planName,planPrice)
+	{
+		planinfo = pf;
+	}	
+
+	
+	void display()
+	{ 
+	std::cout <<planName<<planPrice<<planinfo<<std::endl;
+	}
+};
+//end of TabletSubscription class------------
+
+
+
+class WatchSubscription : public Subscription{
+	private:
+		std::string planinfo;
+		
+	public:
+    WatchSubscription(std::string planName, double planPrice,std::string pf)
+	:Subscription(planName,planPrice)
+	{
+	   planinfo = pf;
+	}	
+	
+	void display()
+	{ 
+	std::cout <<planName<<planPrice<<planinfo<<std::endl;
+	}
+};
+//end of WatchSubscription class------------
+
+
+class ComputerSubscription : public Subscription{
+	private:
+		std::string planinfo;
+		
+	public:
+    ComputerSubscription(std::string planName, double planPrice,std::string pf)
+	:Subscription(planName,planPrice)
+	{
+		planinfo = pf;
+	}	
+		
+void display()
+	{ 
+	std::cout <<planName<<planPrice<<planinfo<<std::endl;
+	}
+};
+//end of ComputerSubscription class------------
+
+class TVSubscription : public Subscription{
+	
+	private:
+		std::string planinfo;
+		
+	public:
+    TVSubscription(std::string planName, double planPrice,std::string pf)
+	:Subscription(planName,planPrice)
+	{
+		planinfo = pf;
+	}	
+		
+void display()
+	{ 
+	std::cout <<planName<<planPrice<<planinfo<<std::endl;
+	}
+};
+//end of TVSubscription  class------------
+
+
+
+int main()
+{ 
+int subnum,devnum,devqty,subqty;
+char yn;
+
+
+std::map<Order*, int> cart;
+
+
+//vectors..............
+  std::vector<Device*> alldevices = {
+    new Phone("Apple iPhone 14", "Phone", 999.99),
+    new Tablet("Apple iPad Pro", "Tablet", 899.99),
+    new Watch("Apple Watch Series 8", "Watch", 399.99),
+    new Computer("Apple MacBook Pro", "Computer", 2399.99),
+    new SmartTV("Apple TV 4K", "Smart TV", 179.99)
+};
+
+std::vector<Subscription*>allsubs = {
+	      new PhoneSubscription("1.Unlimited Talk & Text - Monthly Price ",50," Includes voice, SMS, and data"),
+	      new TabletSubscription("2.Data & Cloud Plan - Monthly Price ",30," Includes data plan and cloud storage"),
+	      new WatchSubscription("3.Fitness & Health Plan - Monthly Price ",15," Includes fitness tracking and health monitoring services"),
+	      new ComputerSubscription("4.Premium Software Support - Monthly Price ",20," Includes antivirus, software updates, and cloud backup"),
+	      new TVSubscription("5.Streaming Bundle - Monthly Price ",25," Includes streaming services and premium channels   ")
+};
+
+
+ std::cout<<"\n          Welcom to Apple!";
+ do{
+ 	
+ 	
+    std::cout<<"\n Avaliable Devices..."<<std::endl;
+    std::cout<<"\nEnter a number 1-5 or 6 to go to subscriptions"<<std::endl;
+    
+    std::vector<Device*>::iterator it; 
+    for(it = alldevices.begin(); it!=alldevices.end(); it++) //, ++index)
+    //for(std::vector<Device>::iterator 
+    //it = alldevices.begin(); it!=alldevices.end(); it++)
+     {
+   	  //std::cout << index << ". ";
+   	  (*it)->display();
+   	  std::cout << std::endl;
+     }
+     
+     std::cout << "Enter a number 1-5 to select a device or 6 to go to subscriptions: ";
+    std::cin >>devnum;
+    while(devnum<1 || devnum>6)
+    {
+    	std::cout<<"\nINVALID";
+    	std::cout << "Enter a number 1-5 to select a device or 6 to go to subscriptions: ";
+       std::cin >>devnum;
+	}
+
+    if (devnum >= 1 && devnum <= 5)
+	 {
+        std::cout << "Enter quantity: ";
+        std::cin >>devqty;
+        
+         
+        cart.insert(std::make_pair(alldevices[devnum - 1],devqty));
+        //cart[alldevices[num-1]]=devgty;
+        std::cout<<devqty<<"x of ";
+        alldevices[devnum - 1]->display();
+		std::cout<<" added to cart!\n";
+     }
+    
+ }while(devnum!=6);
+ 
+ do{
+     //go to subscription.............
+    std::cout<<"Avaliable Subscription Plans"<<"\n";
+     for(std::vector<Subscription*>::iterator 
+     it = allsubs.begin(); it!=allsubs.end(); it++)
+     {
+   	  std::cout<<"\nPlan Name: ";
+	 (*it)->display();
+     }
+     std::cout<<"\n Enter number between 1-5 or 0 to go to check out";
+     std::cin>>subnum;
+     if(subnum == 0) break;
+     
+     bool canPurchase = true;
+  if (subnum == 1 || subnum == 2 || subnum == 3 || subnum == 4 || subnum == 5)
+   { 
+if (subnum == 1 && cart.find(alldevices[0]) == cart.end())
+ canPurchase = false;
+ 
+else if (subnum == 2 && cart.find(alldevices[1]) == cart.end()) 
+canPurchase = false;
+
+else if (subnum == 3 && cart.find(alldevices[2]) == cart.end())
+ canPurchase = false;  
+ 
+ else if (subnum == 4 && cart.find(alldevices[3]) == cart.end())
+  canPurchase = false;
+  
+  else if (subnum == 5 && cart.find(alldevices[4]) == cart.end())
+   canPurchase = false;
+   
+}
+
+ if (canPurchase) 
+ { std::cout << "\nEnter quantity: "; 
+ std::cin >> subqty; 
+ cart[allsubs[devnum - 1]] = subqty; } 
+ 
+ else 
+ { std::cout << "\nYou need to purchase the corresponding device before adding this subscription.\n"; }  
+     
+     std::cout<<"\n Enter Quantity";
+     std::cin>>subqty;
+     
+     cart.insert(std::make_pair(allsubs[subnum - 1],subqty));
+     std::cout << "Plan added to cart!\n";
+}while(subnum!=0);
+
+//display Cart 
+double total = 0, totalDevices = 0, totalSubscriptions = 0;
+int deviceCount = 0, subscriptionCount = 0;
+std::cout << "\nYour Cart summary....";
+
+for (std::map<Order*, int>::iterator it = cart.begin(); it != cart.end(); it++) 
+{
+    std::cout << "\nQuantity: " << it->second;
+    it->first->display();
+
+    Device* device = dynamic_cast<Device*>(it->first);
+    if (device) 
+    {
+        totalDevices += it->second * device->getprice();
+        deviceCount += it->second;
+        std::cout << "\nTotal Device price: $" << it->second * device->getprice();
+    }
+
+    Subscription* sub = dynamic_cast<Subscription*>(it->first);
+    if (sub) 
+    {
+        totalSubscriptions += it->second * sub->getplanPrice();
+        subscriptionCount += it->second;
+        std::cout << "\nTotal Subscription price: $" << it->second * sub->getplanPrice();
+    }
+}
+
+// Calculate discount
+if (deviceCount >= 3 && subscriptionCount >= 3) {
+    total = (totalDevices + totalSubscriptions) * 0.7;
+    std::cout << "\n30% Discount Applied!";
+}
+else if (deviceCount >= 2 && subscriptionCount >= 2) {
+    total = (totalDevices + totalSubscriptions) * 0.8;
+    std::cout << "\n20% Discount Applied!";
+}
+else if (deviceCount >= 1 && subscriptionCount >= 1) {
+    total = (totalDevices + totalSubscriptions) * 0.9;
+    std::cout << "\n10% Discount Applied!";
+}
+else {
+    total = totalDevices + totalSubscriptions;
+}
+
+std::cout << "\nTotal Amount Due: $" << total << std::endl; 
+
+
+	return 0;
+}
+

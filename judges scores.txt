@@ -1,0 +1,79 @@
+// judges score
+# include<stdio.h>
+float displayfunction();
+float lowestfunction(float score1, float score2, float score3, float score4);
+float highestfunction(float score1,float score2,float score3,float score4);
+float finalfunction(float score1,float score2,float score3,float score4,float lowest,float highest);
+main()
+{
+ float score1,score2,score3,score4,lowest,highest,final;
+ score1=displayfunction();
+ score2=displayfunction();
+ score3=displayfunction();
+ score4=displayfunction();
+
+final=finalfunction(score1,score2,score3,score4,lowest,highest);
+printf("Final score is %f",final);
+return 0;
+
+}
+
+
+// functions---------------------------------------------------------------------
+float displayfunction()
+{
+float score;
+printf("Enter a score");
+scanf("%f",&score);
+return score;
+}
+//------------------------------------------------
+ float lowestfunction(float score1, float score2, float score3, float score4)
+{
+	float lowest;
+ if (score1<score2 && score1<score3 && score1<score4)
+	
+ {lowest=score1;}
+ 
+ else if ( score2<score3 && score2<score4)
+ {
+ lowest=score2;
+}
+  else if (  score3<score4)
+  {
+  lowest=score3; }
+  
+  else 
+  { lowest=score4; }
+  
+  return lowest;
+}
+//-----------------------------------------------------------------
+ float highestfunction(float score1,float score2,float score3,float score4)
+{
+float highest;
+if (score1>score2 && score1>score3 && score1>score4)
+{highest=score1;}
+
+else if (score2>score3&& score2>score4)
+{highest=score2;}
+
+else if (score3>score4)
+{highest=score3;}
+
+else
+{highest=score4;}
+
+return highest;
+}
+//-------------------------------------------------------------------
+float finalfunction(float score1,float score2,float score3,float score4,float lowest,float highest)
+ {
+ 	float final;
+lowest=lowestfunction(score1,score2,score3,score4);
+highest=highestfunction(score1,score2,score3,score4);
+ final=(score1+score2+score3+score4-lowest-highest)/2;
+ 
+ return final;
+
+ }
